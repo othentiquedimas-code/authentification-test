@@ -1,0 +1,12 @@
+{
+    "name": "auth-native",
+    "private": true,
+    "scripts": {
+        "build:css": "tailwindcss -i ./src/input.css -o ./public/css/output.css --minify",
+        "watch:css": "tailwindcss -i ./src/input.css -o ./public/css/output.css --watch"
+    },
+    "devDependencies": {
+        "@tailwindcss/cli": "^4.1.13",
+        "tailwindcss": "^4.1.13"
+    }
+}
