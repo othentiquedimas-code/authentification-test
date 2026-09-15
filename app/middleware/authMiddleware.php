@@ -34,6 +34,14 @@ function requireAuth(): int
     return $userId;
 }
 
+function requireRole(array $user, string ...$roles): void
+{
+    if (!in_array((string) ($user['role'] ?? ''), $roles, true)) {
+        redirectToDashboard();
+        exit;
+    }
+}
+
 function redirectIfAuthenticated(): void
 {
     startSecureSession();

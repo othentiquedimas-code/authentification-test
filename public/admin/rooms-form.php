@@ -14,10 +14,11 @@ startSecureSession();
 $userId = requireAuth();
 $currentUser = (new User(database()))->findById($userId);
 
-if ($currentUser === null || ($currentUser['role'] ?? 'etudiant') !== 'admin') {
+if ($currentUser === null) {
     header('Location: ../dashboard.php', true, 302);
     exit;
 }
+requireRole($currentUser, 'admin');
 
 $roomModel = new Room(database());
 $controller = new RoomController($roomModel);
