@@ -18,22 +18,23 @@ final class AuthController
         $email = strtolower(trim((string) ($input['email'] ?? '')));
         $password = (string) ($input['password'] ?? '');
         $passwordConfirmation = (string) ($input['password_confirmation'] ?? '');
+        $role = trim((string) ($input['role'] ?? 'etudiant'));
 
-        $errors = validateRegistration($name, $email, $password, $passwordConfirmation);
+        $errors = validateRegistration($name, $email, $password, $passwordConfirmation, $role);
 
         if ($errors !== []) {
-            return ['errors' => $errors, 'old' => compact('name', 'email')];
+            return ['errors' => $errors, 'old' => compact('name', 'email', 'role')];
         }
 
         if ($this->user->findByEmail($email) !== null) {
             return [
                 'errors' => ['email' => 'Cette adresse email est deja utilisee.'],
-                'old' => compact('name', 'email'),
+                'old' => compact('name', 'email', 'role'),
             ];
         }
 
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-        $this->user->create($name, $email, $passwordHash);
+        $this->user->create($name, $email, $passwordHash, $role);
 
         return ['errors' => [], 'old' => [], 'success' => true];
     }
@@ -59,9 +60,24 @@ final class AuthController
             ];
         }
 
+        if (($user['account_status'] ?? 'actif') === 'en_attente') {
+            return [
+                'errors' => ['form' => 'Votre inscription est en attente de validation par un administrateur.'],
+                'old' => ['email' => $email],
+            ];
+        }
+
+        if (($user['account_status'] ?? 'actif') === 'rejete') {
+            return [
+                'errors' => ['form' => 'Votre inscription a ete rejetee. Contactez l administration.'],
+                'old' => ['email' => $email],
+            ];
+        }
+
         startSecureSession();
         session_regenerate_id(true);
         $_SESSION['user_id'] = (int) $user['id'];
+        $_SESSION['user_role'] = isset($user['role']) && is_string($user['role']) ? $user['role'] : 'etudiant';
         regenerateCsrfToken();
 
         return ['errors' => [], 'old' => [], 'success' => true];
