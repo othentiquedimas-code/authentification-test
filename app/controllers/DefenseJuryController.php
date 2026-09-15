@@ -37,7 +37,18 @@ final class DefenseJuryController
             return ['errors' => $errors, 'old' => compact('defenseId', 'teacherId', 'roleInJury')];
         }
 
-        $this->defenseJury->create($defenseId, $teacherId, $roleInJury);
+        try {
+            $this->defenseJury->create($defenseId, $teacherId, $roleInJury);
+        } catch (PDOException $exception) {
+            if ($exception->getCode() === '23000') {
+                return [
+                    'errors' => ['form' => 'Cet enseignant est deja associe a cette soutenance avec ce role.'],
+                    'old' => compact('defenseId', 'teacherId', 'roleInJury'),
+                ];
+            }
+
+            throw $exception;
+        }
 
         return ['errors' => [], 'old' => [], 'success' => true];
     }
