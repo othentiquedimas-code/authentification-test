@@ -62,6 +62,7 @@ final class AuthController
         startSecureSession();
         session_regenerate_id(true);
         $_SESSION['user_id'] = (int) $user['id'];
+        $_SESSION['user_role'] = isset($user['role']) && is_string($user['role']) ? $user['role'] : 'etudiant';
         regenerateCsrfToken();
 
         return ['errors' => [], 'old' => [], 'success' => true];

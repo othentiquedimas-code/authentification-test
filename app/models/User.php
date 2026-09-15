@@ -13,7 +13,7 @@ final class User
     public function findById(int $id): ?array
     {
         $statement = $this->connection->prepare(
-            'SELECT id, name, email, password_hash, created_at, updated_at
+            'SELECT id, name, email, password_hash, role, created_at, updated_at
              FROM users
              WHERE id = :id
              LIMIT 1'
@@ -28,7 +28,7 @@ final class User
     public function findByEmail(string $email): ?array
     {
         $statement = $this->connection->prepare(
-            'SELECT id, name, email, password_hash, created_at, updated_at
+            'SELECT id, name, email, password_hash, role, created_at, updated_at
              FROM users
              WHERE email = :email
              LIMIT 1'
