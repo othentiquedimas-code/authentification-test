@@ -33,6 +33,13 @@ npm run build:css
 
 Le fichier compile est genere dans `public/css/output.css`.
 
+## Base de donnees
+
+Pour une nouvelle installation, executez `database/schema.sql` dans MySQL.
+
+Si la base existait avant l'ajout des roles, executez une seule fois
+`database/migrations/001_add_user_role.sql` contre `auth_native`.
+
 ## Etat du projet
 
 La premiere version fonctionnelle est disponible sur la branche `code`. Consultez `TASKS.md` pour suivre les phases et les prochaines evolutions.
