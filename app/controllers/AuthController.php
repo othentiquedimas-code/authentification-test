@@ -18,22 +18,23 @@ final class AuthController
         $email = strtolower(trim((string) ($input['email'] ?? '')));
         $password = (string) ($input['password'] ?? '');
         $passwordConfirmation = (string) ($input['password_confirmation'] ?? '');
+        $role = trim((string) ($input['role'] ?? 'etudiant'));
 
-        $errors = validateRegistration($name, $email, $password, $passwordConfirmation);
+        $errors = validateRegistration($name, $email, $password, $passwordConfirmation, $role);
 
         if ($errors !== []) {
-            return ['errors' => $errors, 'old' => compact('name', 'email')];
+            return ['errors' => $errors, 'old' => compact('name', 'email', 'role')];
         }
 
         if ($this->user->findByEmail($email) !== null) {
             return [
                 'errors' => ['email' => 'Cette adresse email est deja utilisee.'],
-                'old' => compact('name', 'email'),
+                'old' => compact('name', 'email', 'role'),
             ];
         }
 
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-        $this->user->create($name, $email, $passwordHash);
+        $this->user->create($name, $email, $passwordHash, $role);
 
         return ['errors' => [], 'old' => [], 'success' => true];
     }

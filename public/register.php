@@ -70,6 +70,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
 
                 <div>
+                    <label class="mb-2 block text-sm font-medium text-[#f5f2eb]" for="role">Je suis</label>
+                    <select class="w-full rounded-xl border border-white/15 bg-[#26343a] px-4 py-3 text-[#f5f2eb] outline-none transition focus:border-[#e76f51] focus:ring-2 focus:ring-[#e76f51]/30" id="role" name="role" required>
+                        <option value="etudiant" <?= (($old['role'] ?? 'etudiant') === 'etudiant') ? 'selected' : '' ?>>Étudiant</option>
+                        <option value="enseignant" <?= (($old['role'] ?? '') === 'enseignant') ? 'selected' : '' ?>>Enseignant</option>
+                    </select>
+                    <?php if (isset($errors['role'])): ?><p class="mt-2 text-sm text-red-300" role="alert"><?= e($errors['role']) ?></p><?php endif; ?>
+                    <p class="mt-2 text-xs text-white/45">Le rôle administrateur est attribué uniquement par la base de données.</p>
+                </div>
+
+                <div>
                     <label class="mb-2 block text-sm font-medium text-[#f5f2eb]" for="password">Mot de passe</label>
                     <input class="w-full rounded-xl border border-white/15 bg-white/10 px-4 py-3 text-[#f5f2eb] outline-none transition focus:border-[#e76f51] focus:ring-2 focus:ring-[#e76f51]/30" id="password" name="password" type="password" required minlength="8" autocomplete="new-password">
                     <?php if (isset($errors['password'])): ?><p class="mt-2 text-sm text-red-300" role="alert"><?= e($errors['password']) ?></p><?php endif; ?>

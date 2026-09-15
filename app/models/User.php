@@ -40,16 +40,17 @@ final class User
         return $user === false ? null : $user;
     }
 
-    public function create(string $name, string $email, string $passwordHash): int
+    public function create(string $name, string $email, string $passwordHash, string $role = 'etudiant'): int
     {
         $statement = $this->connection->prepare(
-            'INSERT INTO users (name, email, password_hash)
-             VALUES (:name, :email, :password_hash)'
+            'INSERT INTO users (name, email, password_hash, role)
+             VALUES (:name, :email, :password_hash, :role)'
         );
         $statement->execute([
             'name' => $name,
             'email' => $email,
             'password_hash' => $passwordHash,
+            'role' => $role,
         ]);
 
         return (int) $this->connection->lastInsertId();

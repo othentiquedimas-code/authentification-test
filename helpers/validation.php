@@ -2,9 +2,13 @@
 
 declare(strict_types=1);
 
-function validateRegistration(string $name, string $email, string $password, string $passwordConfirmation): array
+function validateRegistration(string $name, string $email, string $password, string $passwordConfirmation, string $role = 'etudiant'): array
 {
     $errors = [];
+
+    if (!in_array($role, ['enseignant', 'etudiant'], true)) {
+        $errors['role'] = 'Veuillez selectionner un role valide.';
+    }
 
     if ($name === '') {
         $errors['name'] = 'Le nom est obligatoire.';
