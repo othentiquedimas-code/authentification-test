@@ -115,6 +115,14 @@ final class DefenseController
 
     public function delete(int $id): bool
     {
-        return $this->defense->delete($id);
+        try {
+            return $this->defense->delete($id);
+        } catch (PDOException $exception) {
+            if ($exception->getCode() === '23000') {
+                return false;
+            }
+
+            throw $exception;
+        }
     }
 }

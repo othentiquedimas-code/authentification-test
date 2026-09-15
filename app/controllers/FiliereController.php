@@ -71,6 +71,14 @@ final class FiliereController
 
     public function delete(int $id): bool
     {
-        return $this->filiere->delete($id);
+        try {
+            return $this->filiere->delete($id);
+        } catch (PDOException $exception) {
+            if ($exception->getCode() === '23000') {
+                return false;
+            }
+
+            throw $exception;
+        }
     }
 }

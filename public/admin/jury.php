@@ -59,6 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'delet
                 <a class="block rounded-lg px-3 py-2 hover:bg-slate-800" href="rooms.php">Salles</a>
                 <a class="block rounded-lg px-3 py-2 hover:bg-slate-800" href="defenses.php">Soutenances</a>
                 <a class="block rounded-lg bg-slate-800 px-3 py-2 font-semibold" href="jury.php">Jurys</a>
+                <a class="block rounded-lg px-3 py-2 hover:bg-slate-800" href="../calendar.php">Calendrier</a>
                 <a class="block rounded-lg px-3 py-2 hover:bg-slate-800" href="../logout.php">Déconnexion</a>
             </nav>
         </aside>

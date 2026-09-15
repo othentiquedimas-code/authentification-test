@@ -75,6 +75,14 @@ final class TeacherController
 
     public function delete(int $id): bool
     {
-        return $this->teacher->delete($id);
+        try {
+            return $this->teacher->delete($id);
+        } catch (PDOException $exception) {
+            if ($exception->getCode() === '23000') {
+                return false;
+            }
+
+            throw $exception;
+        }
     }
 }

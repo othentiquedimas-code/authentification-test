@@ -56,6 +56,14 @@ final class RoomController
 
     public function delete(int $id): bool
     {
-        return $this->room->delete($id);
+        try {
+            return $this->room->delete($id);
+        } catch (PDOException $exception) {
+            if ($exception->getCode() === '23000') {
+                return false;
+            }
+
+            throw $exception;
+        }
     }
 }
