@@ -23,7 +23,7 @@ requireRole($currentUser, 'admin');
 $teacherModel = new Teacher(database());
 $controller = new TeacherController($teacherModel);
 $errors = [];
-$old = ['nom' => '', 'prenom' => '', 'email' => '', 'telephone' => '', 'specialite' => ''];
+$old = ['nom' => '', 'prenom' => '', 'email' => (string) ($_GET['email'] ?? ''), 'telephone' => '', 'specialite' => ''];
 $mode = 'create';
 $editingId = null;
 

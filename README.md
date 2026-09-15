@@ -40,6 +40,10 @@ Pour une nouvelle installation, executez `database/schema.sql` dans MySQL.
 Si la base existait avant l'ajout des roles, executez une seule fois
 `database/migrations/001_add_user_role.sql` contre `auth_native`.
 
+Pour une base deja existante avant le systeme de validation des inscriptions,
+executez ensuite `database/migrations/002_add_account_status.sql`. Les nouveaux
+comptes restent en attente jusqu'a validation par un administrateur.
+
 ## Etat du projet
 
 La premiere version fonctionnelle est disponible sur la branche `code`. Consultez `TASKS.md` pour suivre les phases et les prochaines evolutions.

@@ -37,6 +37,7 @@ $upcomingDefenses = $stats->upcomingDefenses();
             <div class="flex items-center justify-between border-b border-white/10 px-6 py-6"><div><p class="text-xs font-bold uppercase tracking-[0.24em] text-brand-300">Portail universitaire</p><h1 class="mt-2 font-display text-2xl font-bold text-white">UniSoutenance</h1></div><span class="rounded-full bg-brand-500 px-3 py-1 text-[0.65rem] font-bold uppercase tracking-wider text-white">Admin</span></div>
             <nav class="flex flex-wrap gap-2 p-4 text-sm lg:block lg:space-y-2 lg:p-5">
                 <a class="app-sidebar-link is-active block whitespace-nowrap rounded-xl px-3 py-2.5 font-semibold" href="dashboard.php">Vue d'ensemble</a>
+                <a class="app-sidebar-link block whitespace-nowrap rounded-xl px-3 py-2.5" href="users.php">Comptes inscrits</a>
                 <a class="app-sidebar-link block whitespace-nowrap rounded-xl px-3 py-2.5" href="filieres.php">Filières</a>
                 <a class="app-sidebar-link block whitespace-nowrap rounded-xl px-3 py-2.5" href="teachers.php">Enseignants</a>
                 <a class="app-sidebar-link block whitespace-nowrap rounded-xl px-3 py-2.5" href="students.php">Étudiants</a>

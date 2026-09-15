@@ -26,7 +26,7 @@ $filiers = $filiereModel->all();
 $studentModel = new Student(database());
 $controller = new StudentController($studentModel);
 $errors = [];
-$old = ['nom' => '', 'prenom' => '', 'matricule' => '', 'email' => '', 'telephone' => '', 'filiere_id' => '', 'niveau' => '', 'annee_academique' => ''];
+$old = ['nom' => '', 'prenom' => '', 'matricule' => '', 'email' => (string) ($_GET['email'] ?? ''), 'telephone' => '', 'filiere_id' => '', 'niveau' => '', 'annee_academique' => ''];
 $mode = 'create';
 $editingId = null;
 

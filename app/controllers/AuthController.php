@@ -60,6 +60,20 @@ final class AuthController
             ];
         }
 
+        if (($user['account_status'] ?? 'actif') === 'en_attente') {
+            return [
+                'errors' => ['form' => 'Votre inscription est en attente de validation par un administrateur.'],
+                'old' => ['email' => $email],
+            ];
+        }
+
+        if (($user['account_status'] ?? 'actif') === 'rejete') {
+            return [
+                'errors' => ['form' => 'Votre inscription a ete rejetee. Contactez l administration.'],
+                'old' => ['email' => $email],
+            ];
+        }
+
         startSecureSession();
         session_regenerate_id(true);
         $_SESSION['user_id'] = (int) $user['id'];
