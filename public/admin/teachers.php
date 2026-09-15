@@ -58,9 +58,9 @@ if (isset($_GET['success']) && $_GET['success'] === '1') {
     <title>Enseignants - UniSoutenance</title>
     <link rel="stylesheet" href="../css/output.css">
 </head>
-<body class="min-h-screen bg-slate-100 text-slate-800">
+<body class="app-background min-h-screen text-slate-800">
     <div class="flex min-h-screen">
-        <aside class="w-72 bg-slate-900 text-slate-100">
+        <aside class="app-sidebar w-72 bg-slate-900 text-slate-100">
             <div class="border-b border-slate-700 p-6">
                 <h1 class="text-2xl font-bold text-white">UniSoutenance</h1>
             </div>

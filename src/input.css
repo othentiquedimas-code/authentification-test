@@ -3,12 +3,132 @@
 @theme {
     --font-sans: "DM Sans", "Segoe UI", sans-serif;
     --font-display: "Space Grotesk", "Segoe UI", sans-serif;
+    --color-brand-50: #fff4ef;
+    --color-brand-100: #ffe2d7;
+    --color-brand-200: #ffc5b2;
+    --color-brand-300: #ff9e83;
+    --color-brand-400: #f77b5d;
+    --color-brand-500: #e85d3f;
+    --color-brand-600: #c9472d;
+    --color-brand-700: #a63827;
+    --color-ink-950: #172126;
+    --color-teal-500: #2f8f83;
+    --color-sun-400: #f4c95d;
 }
 
 @layer base {
+    :root {
+        color-scheme: light;
+    }
+
+    * {
+        border-color: #e3e7e4;
+    }
+
     body {
-        background: #f5f2eb;
-        color: #172126;
+        background: #f6f4ef;
+        color: var(--color-ink-950);
         font-family: var(--font-sans);
+    }
+
+    ::selection {
+        background: #ffc5b2;
+        color: #172126;
+    }
+}
+
+@layer components {
+    .app-background {
+        background:
+            radial-gradient(circle at 12% 0%, rgba(232, 93, 63, 0.12), transparent 30rem),
+            radial-gradient(circle at 92% 12%, rgba(47, 143, 131, 0.12), transparent 28rem),
+            #f6f4ef;
+    }
+
+    .app-sidebar {
+        background: #172126;
+        box-shadow: 18px 0 50px rgba(23, 33, 38, 0.12);
+    }
+
+    .app-sidebar-link {
+        color: rgba(246, 244, 239, 0.64);
+        transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+    }
+
+    .app-sidebar-link:hover,
+    .app-sidebar-link.is-active {
+        background: rgba(255, 255, 255, 0.1);
+        color: #fffaf5;
+        transform: translateX(3px);
+    }
+
+    .app-sidebar nav a {
+        color: rgba(246, 244, 239, 0.64);
+        transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+    }
+
+    .app-sidebar nav a:hover,
+    .app-sidebar nav a.bg-slate-800 {
+        background: rgba(255, 255, 255, 0.1);
+        color: #fffaf5;
+        transform: translateX(3px);
+    }
+
+    .app-surface {
+        border: 1px solid rgba(23, 33, 38, 0.08);
+        background: rgba(255, 255, 255, 0.86);
+        box-shadow: 0 18px 45px rgba(23, 33, 38, 0.07);
+        backdrop-filter: blur(12px);
+    }
+
+    .app-stat-card {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(23, 33, 38, 0.08);
+        background: #fffdf9;
+        box-shadow: 0 14px 30px rgba(23, 33, 38, 0.06);
+        transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .app-stat-card::after {
+        position: absolute;
+        right: -1.5rem;
+        top: -1.5rem;
+        width: 6rem;
+        height: 6rem;
+        border-radius: 999px;
+        background: rgba(232, 93, 63, 0.1);
+        content: "";
+    }
+
+    .app-stat-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 38px rgba(23, 33, 38, 0.11);
+    }
+
+    .app-kicker {
+        color: var(--color-brand-600);
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+    }
+
+    .app-button-primary {
+        background: var(--color-brand-500);
+        color: #fffaf5;
+        box-shadow: 0 10px 20px rgba(232, 93, 63, 0.2);
+        transition: background-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+    }
+
+    .app-button-primary:hover {
+        background: var(--color-brand-600);
+        box-shadow: 0 14px 24px rgba(232, 93, 63, 0.28);
+        transform: translateY(-1px);
+    }
+
+    .app-table-head {
+        background: #f4f1eb;
+        color: #657178;
     }
 }

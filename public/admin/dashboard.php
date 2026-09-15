@@ -31,27 +31,25 @@ $upcomingDefenses = $stats->upcomingDefenses();
     <title>Dashboard admin - UniSoutenance</title>
     <link rel="stylesheet" href="../css/output.css">
 </head>
-<body class="min-h-screen bg-slate-100 text-slate-800">
-    <div class="flex min-h-screen">
-        <aside class="w-72 bg-slate-900 text-slate-100">
-            <div class="border-b border-slate-700 p-6"><h1 class="text-2xl font-bold text-white">UniSoutenance</h1></div>
-            <nav class="space-y-2 p-5 text-sm">
-                <a class="block rounded-lg bg-slate-800 px-3 py-2 font-semibold" href="dashboard.php">Dashboard</a>
-                <a class="block rounded-lg px-3 py-2 hover:bg-slate-800" href="filieres.php">Filières</a>
-                <a class="block rounded-lg px-3 py-2 hover:bg-slate-800" href="teachers.php">Enseignants</a>
-                <a class="block rounded-lg px-3 py-2 hover:bg-slate-800" href="students.php">Étudiants</a>
-                <a class="block rounded-lg px-3 py-2 hover:bg-slate-800" href="rooms.php">Salles</a>
-                <a class="block rounded-lg px-3 py-2 hover:bg-slate-800" href="defenses.php">Soutenances</a>
-                <a class="block rounded-lg px-3 py-2 hover:bg-slate-800" href="jury.php">Jurys</a>
-                <a class="block rounded-lg px-3 py-2 hover:bg-slate-800" href="../calendar.php">Calendrier</a>
-                <a class="block rounded-lg px-3 py-2 hover:bg-slate-800" href="../logout.php">Déconnexion</a>
+<body class="app-background min-h-screen text-slate-800">
+    <div class="min-h-screen lg:flex">
+        <aside class="app-sidebar w-full shrink-0 text-slate-100 lg:min-h-screen lg:w-72">
+            <div class="flex items-center justify-between border-b border-white/10 px-6 py-6"><div><p class="text-xs font-bold uppercase tracking-[0.24em] text-brand-300">Portail universitaire</p><h1 class="mt-2 font-display text-2xl font-bold text-white">UniSoutenance</h1></div><span class="rounded-full bg-brand-500 px-3 py-1 text-[0.65rem] font-bold uppercase tracking-wider text-white">Admin</span></div>
+            <nav class="flex gap-2 overflow-x-auto p-4 text-sm lg:block lg:space-y-2 lg:p-5">
+                <a class="app-sidebar-link is-active block whitespace-nowrap rounded-xl px-3 py-2.5 font-semibold" href="dashboard.php">Vue d'ensemble</a>
+                <a class="app-sidebar-link block whitespace-nowrap rounded-xl px-3 py-2.5" href="filieres.php">Filières</a>
+                <a class="app-sidebar-link block whitespace-nowrap rounded-xl px-3 py-2.5" href="teachers.php">Enseignants</a>
+                <a class="app-sidebar-link block whitespace-nowrap rounded-xl px-3 py-2.5" href="students.php">Étudiants</a>
+                <a class="app-sidebar-link block whitespace-nowrap rounded-xl px-3 py-2.5" href="rooms.php">Salles</a>
+                <a class="app-sidebar-link block whitespace-nowrap rounded-xl px-3 py-2.5" href="defenses.php">Soutenances</a>
+                <a class="app-sidebar-link block whitespace-nowrap rounded-xl px-3 py-2.5" href="jury.php">Jurys</a>
+                <a class="app-sidebar-link block whitespace-nowrap rounded-xl px-3 py-2.5" href="../calendar.php">Calendrier</a>
+                <a class="app-sidebar-link block whitespace-nowrap rounded-xl px-3 py-2.5" href="../logout.php">Déconnexion</a>
             </nav>
         </aside>
-        <main class="flex-1 p-8">
-            <div class="mb-8">
-                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-500">Vue d'ensemble</p>
-                <h2 class="mt-2 text-3xl font-bold text-slate-900">Bonjour, <?= e((string) ($currentUser['name'] ?? 'Administrateur')) ?></h2>
-                <p class="mt-2 text-slate-500">Suivez les ressources et les prochaines soutenances.</p>
+        <main class="min-w-0 flex-1 p-5 sm:p-8 lg:p-10">
+            <div class="mb-8 overflow-hidden rounded-[1.75rem] bg-ink-950 p-7 text-white shadow-2xl shadow-slate-900/10 sm:p-9">
+                <div class="flex flex-col justify-between gap-8 md:flex-row md:items-end"><div><p class="app-kicker text-brand-300">Tableau de pilotage</p><h2 class="mt-3 max-w-xl font-display text-3xl font-bold leading-tight sm:text-4xl">Bonjour, <?= e((string) ($currentUser['name'] ?? 'Administrateur')) ?>.</h2><p class="mt-3 max-w-lg text-sm leading-6 text-white/60">Une vue claire des ressources, des soutenances et du rythme de votre établissement.</p></div><a href="defenses-form.php" class="app-button-primary inline-flex w-fit items-center rounded-xl px-4 py-3 text-sm font-bold">+ Planifier une soutenance</a></div>
             </div>
 
             <section class="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
@@ -62,21 +60,21 @@ $upcomingDefenses = $stats->upcomingDefenses();
                     ['label' => 'Salles', 'value' => $counts['rooms'] ?? 0, 'href' => 'rooms.php'],
                     ['label' => 'Soutenances', 'value' => $counts['defenses'] ?? 0, 'href' => 'defenses.php'],
                 ] as $stat): ?>
-                    <a href="<?= e($stat['href']) ?>" class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-slate-400">
-                        <p class="text-sm font-medium text-slate-500"><?= e($stat['label']) ?></p>
-                        <p class="mt-3 text-3xl font-bold text-slate-900"><?= (int) $stat['value'] ?></p>
+                    <a href="<?= e($stat['href']) ?>" class="app-stat-card rounded-2xl p-5">
+                        <span class="relative z-10 block text-2xl text-brand-500">●</span><p class="relative z-10 mt-4 text-sm font-semibold text-slate-500"><?= e($stat['label']) ?></p>
+                        <p class="relative z-10 mt-2 font-display text-3xl font-bold text-slate-900"><?= (int) $stat['value'] ?></p>
                     </a>
                 <?php endforeach; ?>
             </section>
 
-            <section class="mt-8 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+            <section class="app-surface mt-8 overflow-hidden rounded-2xl">
                 <div class="flex items-center justify-between border-b border-slate-200 px-6 py-5">
-                    <div><h3 class="text-lg font-bold text-slate-900">Prochaines soutenances</h3><p class="mt-1 text-sm text-slate-500">Les cinq prochaines dates planifiées.</p></div>
-                    <a href="defenses.php" class="text-sm font-semibold text-slate-700 hover:text-slate-900">Tout afficher</a>
+                    <div><p class="app-kicker">Agenda</p><h3 class="mt-1 text-xl font-bold text-slate-900">Prochaines soutenances</h3><p class="mt-1 text-sm text-slate-500">Les cinq prochaines dates planifiées.</p></div>
+                    <a href="defenses.php" class="rounded-lg bg-brand-50 px-3 py-2 text-sm font-bold text-brand-700 hover:bg-brand-100">Tout afficher</a>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-slate-200 text-left text-sm">
-                        <thead class="bg-slate-50 text-slate-600"><tr><th class="px-6 py-3 font-semibold">Étudiant</th><th class="px-6 py-3 font-semibold">Sujet</th><th class="px-6 py-3 font-semibold">Date</th><th class="px-6 py-3 font-semibold">Salle</th><th class="px-6 py-3 font-semibold">Statut</th></tr></thead>
+                        <thead class="app-table-head"><tr><th class="px-6 py-3 font-semibold">Étudiant</th><th class="px-6 py-3 font-semibold">Sujet</th><th class="px-6 py-3 font-semibold">Date</th><th class="px-6 py-3 font-semibold">Salle</th><th class="px-6 py-3 font-semibold">Statut</th></tr></thead>
                         <tbody class="divide-y divide-slate-200">
                             <?php if ($upcomingDefenses === []): ?>
                                 <tr><td colspan="5" class="px-6 py-10 text-center text-slate-500">Aucune soutenance à venir.</td></tr>

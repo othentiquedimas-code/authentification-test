@@ -37,7 +37,7 @@ $jury = $defense !== null ? $studentDashboard->jury((int) $defense['id']) : [];
     <title>Espace étudiant - UniSoutenance</title>
     <link rel="stylesheet" href="css/output.css">
 </head>
-<body class="min-h-screen bg-slate-100 text-slate-800">
+<body class="app-background min-h-screen text-slate-800">
     <header class="border-b border-slate-200 bg-white">
         <nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
             <a class="text-xl font-bold tracking-tight text-slate-900" href="student-dashboard.php">UniSoutenance</a>

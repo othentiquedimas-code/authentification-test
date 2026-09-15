@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title><?= $mode === 'edit' ? 'Modifier' : 'Créer' ?> un enseignant - UniSoutenance</title>
     <link rel="stylesheet" href="../css/output.css">
 </head>
-<body class="min-h-screen bg-slate-100 text-slate-800">
+<body class="app-background min-h-screen text-slate-800">
     <div class="mx-auto max-w-3xl p-8">
         <div class="mb-8 flex items-center justify-between">
             <div>
