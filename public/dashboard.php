@@ -17,6 +17,16 @@ if ($user === null) {
     header('Location: login.php', true, 302);
     exit;
 }
+
+if (($user['role'] ?? 'etudiant') === 'admin') {
+    header('Location: admin/dashboard.php', true, 302);
+    exit;
+}
+
+if (($user['role'] ?? 'etudiant') === 'enseignant') {
+    header('Location: teacher-dashboard.php', true, 302);
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
