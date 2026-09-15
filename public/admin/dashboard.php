@@ -44,7 +44,7 @@ $upcomingDefenses = $stats->upcomingDefenses();
                 <a class="app-sidebar-link block whitespace-nowrap rounded-xl px-3 py-2.5" href="defenses.php">Soutenances</a>
                 <a class="app-sidebar-link block whitespace-nowrap rounded-xl px-3 py-2.5" href="jury.php">Jurys</a>
                 <a class="app-sidebar-link block whitespace-nowrap rounded-xl px-3 py-2.5" href="../calendar.php">Calendrier</a>
-                <a class="app-sidebar-link block whitespace-nowrap rounded-xl px-3 py-2.5" href="../logout.php">Déconnexion</a>
+                <form method="post" action="../logout.php"><input type="hidden" name="csrf_token" value="<?= e(csrfToken()) ?>"><button class="app-sidebar-link block w-full whitespace-nowrap rounded-xl px-3 py-2.5 text-left" type="submit">Déconnexion</button></form>
             </nav>
         </aside>
         <main class="min-w-0 flex-1 p-5 sm:p-8 lg:p-10">

@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'delet
                 <a class="block rounded-lg px-3 py-2 hover:bg-slate-800" href="defenses.php">Soutenances</a>
                 <a class="block rounded-lg bg-slate-800 px-3 py-2 font-semibold" href="jury.php">Jurys</a>
                 <a class="block rounded-lg px-3 py-2 hover:bg-slate-800" href="../calendar.php">Calendrier</a>
-                <a class="block rounded-lg px-3 py-2 hover:bg-slate-800" href="../logout.php">Déconnexion</a>
+                <form method="post" action="../logout.php"><input type="hidden" name="csrf_token" value="<?= e(csrfToken()) ?>"><button class="block w-full rounded-lg px-3 py-2 text-left hover:bg-slate-800" type="submit">Déconnexion</button></form>
             </nav>
         </aside>
         <main class="min-w-0 flex-1 p-5 sm:p-8">
