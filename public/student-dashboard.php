@@ -42,7 +42,7 @@ $jury = $defense !== null ? $studentDashboard->jury((int) $defense['id']) : [];
         <nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
             <a class="text-xl font-bold tracking-tight text-slate-900" href="student-dashboard.php">UniSoutenance</a>
             <div class="flex items-center gap-4">
-                <span class="hidden text-sm text-slate-500 sm:inline"><?= e((string) ($user['email'] ?? '')) ?></span>
+                <a class="text-sm font-semibold text-slate-600 hover:text-slate-900" href="calendar.php">Calendrier</a><span class="hidden text-sm text-slate-500 sm:inline"><?= e((string) ($user['email'] ?? '')) ?></span>
                 <form method="post" action="logout.php"><input type="hidden" name="csrf_token" value="<?= e(csrfToken()) ?>"><button class="rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-100" type="submit">Se déconnecter</button></form>
             </div>
         </nav>
