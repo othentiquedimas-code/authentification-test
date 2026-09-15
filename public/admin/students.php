@@ -65,7 +65,7 @@ if (isset($_GET['success']) && $_GET['success'] === '1') {
                 <h1 class="text-2xl font-bold text-white">UniSoutenance</h1>
             </div>
             <nav class="space-y-2 p-5 text-sm">
-                <a class="block rounded-lg px-3 py-2 hover:bg-slate-800" href="../dashboard.php">Dashboard</a>
+                <a class="block rounded-lg px-3 py-2 hover:bg-slate-800" href="dashboard.php">Dashboard</a>
                 <a class="block rounded-lg px-3 py-2 hover:bg-slate-800" href="filieres.php">Filières</a>
                 <a class="block rounded-lg px-3 py-2 hover:bg-slate-800" href="teachers.php">Enseignants</a>
                 <a class="block rounded-lg bg-slate-800 px-3 py-2 font-semibold" href="students.php">Étudiants</a>

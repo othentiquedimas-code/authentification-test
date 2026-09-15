@@ -16,9 +16,6 @@ CREATE TABLE IF NOT EXISTS users (
   DEFAULT CHARSET=utf8mb4
   COLLATE=utf8mb4_unicode_ci;
 
-ALTER TABLE users
-    ADD COLUMN IF NOT EXISTS role ENUM('admin', 'enseignant', 'etudiant') NOT NULL DEFAULT 'etudiant' AFTER password_hash;
-
 CREATE TABLE IF NOT EXISTS filiers (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(150) NOT NULL,
