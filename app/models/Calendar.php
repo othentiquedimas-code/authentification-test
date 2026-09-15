@@ -25,6 +25,25 @@ final class Calendar
         $conditions = [];
         $parameters = [];
 
+        $role = (string) ($filters['role'] ?? 'etudiant');
+        if ($role === 'enseignant') {
+            $conditions[] = 'EXISTS (
+                SELECT 1 FROM teachers scope_teacher
+                WHERE scope_teacher.id = d.supervisor_teacher_id
+                  AND (scope_teacher.user_id = :scope_user_id OR LOWER(scope_teacher.email) = LOWER(:scope_email))
+            )';
+            $parameters['scope_user_id'] = (int) ($filters['user_id'] ?? 0);
+            $parameters['scope_email'] = strtolower((string) ($filters['email'] ?? ''));
+        } elseif ($role === 'etudiant') {
+            $conditions[] = 'EXISTS (
+                SELECT 1 FROM students scope_student
+                WHERE scope_student.id = d.student_id
+                  AND (scope_student.user_id = :scope_user_id OR LOWER(scope_student.email) = LOWER(:scope_email))
+            )';
+            $parameters['scope_user_id'] = (int) ($filters['user_id'] ?? 0);
+            $parameters['scope_email'] = strtolower((string) ($filters['email'] ?? ''));
+        }
+
         if (($filters['date'] ?? '') !== '') {
             $conditions[] = 'd.defense_date = :defense_date';
             $parameters['defense_date'] = $filters['date'];
