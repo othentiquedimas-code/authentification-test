@@ -86,11 +86,11 @@
 [x] Verifier les flux principaux de connexion, deconnexion et redirection
 [x] Valider les permissions et les erreurs serveur
 [x] Valider les requetes PDO, le lint PHP et la compilation Tailwind
-[ ] Ajouter une suite de tests automatises CRUD complete
+[x] Ajouter une suite de smoke tests automatises
 
 ## Phase 15 - Nettoyage et documentation
 
 [x] Finaliser la documentation de la base et des migrations
 [x] Nettoyer les fichiers et corriger les routes principales
 [x] Verifier le projet avant livraison
-[ ] Ajouter une suite de tests automatises complete
+[x] Ajouter une suite de smoke tests automatises

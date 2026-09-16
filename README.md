@@ -75,3 +75,9 @@ Pour verifier MySQL Laragon :
 ```powershell
 & 'C:\laragon\bin\mysql\mysql-8.4.3-winx64\bin\mysqladmin.exe' --host=127.0.0.1 --port=3306 --user=root ping
 ```
+
+Pour lancer les tests smoke non destructifs :
+
+```powershell
+php tests/smoke.php
+```
