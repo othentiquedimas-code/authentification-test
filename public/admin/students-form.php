@@ -103,6 +103,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <a href="students.php" class="rounded-lg border border-slate-300 bg-white px-4 py-2 font-semibold text-slate-700 hover:border-slate-400">Retour</a>
         </div>
 
+        <?php if (isset($_GET['validated'])): ?><div class="mb-6 rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-700">Compte validé. Complétez maintenant le profil étudiant pour le rendre visible dans la liste des étudiants.</div><?php endif; ?>
+
         <?php if (isset($errors['form'])): ?>
             <div class="mb-6 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700"><?= e($errors['form']) ?></div>
         <?php endif; ?>

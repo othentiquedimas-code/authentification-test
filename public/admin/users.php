@@ -29,13 +29,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $targetId = filter_var($_POST['id'] ?? null, FILTER_VALIDATE_INT);
         $status = (string) ($_POST['account_status'] ?? '');
+        $account = $targetId !== false && $targetId > 0 ? $userModel->findById($targetId) : null;
         if ($targetId === false || $targetId < 1 || !in_array($status, $allowedStatuses, true)) {
             $errors['form'] = 'Paramètres de validation invalides.';
+        } elseif ($account === null) {
+            $errors['form'] = 'Compte introuvable.';
         } elseif ($targetId === $userId && $status !== 'actif') {
             $errors['form'] = 'Le compte administrateur connecté ne peut pas être désactivé ici.';
         } elseif (!$userModel->updateStatus($targetId, $status)) {
             $errors['form'] = 'Impossible de mettre à jour ce compte.';
         } else {
+            if ($status === 'actif' && ($account['account_status'] ?? '') === 'en_attente') {
+                $profileForm = ($account['role'] ?? '') === 'enseignant' ? 'teachers-form.php' : 'students-form.php';
+                header('Location: ' . $profileForm . '?email=' . rawurlencode((string) $account['email']) . '&validated=1');
+                exit;
+            }
+
             header('Location: users.php?success=1');
             exit;
         }
@@ -68,11 +77,11 @@ $success = isset($_GET['success']) && $_GET['success'] === '1';
             </nav>
         </aside>
         <main class="min-w-0 flex-1 p-5 sm:p-8 lg:p-10">
-            <div class="mb-8"><p class="app-kicker">Validation</p><h2 class="mt-2 font-display text-3xl font-bold text-slate-900">Comptes inscrits</h2><p class="mt-2 text-slate-500">Validez une inscription avant que l’utilisateur accède à son espace.</p></div>
+            <div class="mb-8"><p class="app-kicker">Validation</p><h2 class="mt-2 font-display text-3xl font-bold text-slate-900">Comptes inscrits</h2><p class="mt-2 text-slate-500">Validez une inscription, puis complétez immédiatement le profil étudiant ou enseignant.</p></div>
             <?php if ($success): ?><div class="mb-6 rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-700">Le statut du compte a été mis à jour.</div><?php endif; ?>
             <?php if (isset($errors['form'])): ?><div class="mb-6 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700"><?= e($errors['form']) ?></div><?php endif; ?>
             <section class="app-surface overflow-hidden rounded-2xl"><div class="overflow-x-auto"><table class="min-w-full divide-y divide-slate-200 text-left text-sm"><thead class="app-table-head"><tr><th class="px-6 py-3 font-semibold">Nom</th><th class="px-6 py-3 font-semibold">Email</th><th class="px-6 py-3 font-semibold">Rôle</th><th class="px-6 py-3 font-semibold">Statut</th><th class="px-6 py-3 text-right font-semibold">Action</th></tr></thead><tbody class="divide-y divide-slate-200">
-                <?php foreach ($users as $account): ?><tr><td class="px-6 py-4 font-medium"><?= e((string) $account['name']) ?></td><td class="px-6 py-4"><?= e((string) $account['email']) ?></td><td class="px-6 py-4"><?= e((string) $account['role']) ?></td><td class="px-6 py-4"><?= e((string) $account['account_status']) ?></td><td class="px-6 py-4 text-right"><div class="flex justify-end gap-2"><form method="post" action="users.php"><input type="hidden" name="csrf_token" value="<?= e(csrfToken()) ?>"><input type="hidden" name="id" value="<?= (int) $account['id'] ?>"><input type="hidden" name="account_status" value="actif"><button class="rounded-lg bg-emerald-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-emerald-700" type="submit">Valider</button></form><form method="post" action="users.php"><input type="hidden" name="csrf_token" value="<?= e(csrfToken()) ?>"><input type="hidden" name="id" value="<?= (int) $account['id'] ?>"><input type="hidden" name="account_status" value="rejete"><button class="rounded-lg border border-red-200 bg-red-50 px-3 py-1.5 text-xs font-semibold text-red-700 hover:bg-red-100" type="submit">Rejeter</button></form></div></td></tr><?php endforeach; ?>
+                <?php foreach ($users as $account): ?><tr><td class="px-6 py-4 font-medium"><?= e((string) $account['name']) ?></td><td class="px-6 py-4"><?= e((string) $account['email']) ?></td><td class="px-6 py-4"><?= e((string) $account['role']) ?></td><td class="px-6 py-4"><?= e((string) $account['account_status']) ?></td><td class="px-6 py-4 text-right"><div class="flex justify-end gap-2"><form method="post" action="users.php"><input type="hidden" name="csrf_token" value="<?= e(csrfToken()) ?>"><input type="hidden" name="id" value="<?= (int) $account['id'] ?>"><input type="hidden" name="account_status" value="actif"><button class="app-button-primary rounded-lg px-4 py-2 text-xs font-bold" type="submit">Valider et compléter</button></form><form method="post" action="users.php"><input type="hidden" name="csrf_token" value="<?= e(csrfToken()) ?>"><input type="hidden" name="id" value="<?= (int) $account['id'] ?>"><input type="hidden" name="account_status" value="rejete"><button class="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-xs font-semibold text-red-700 hover:bg-red-100" type="submit">Rejeter</button></form></div></td></tr><?php endforeach; ?>
             </tbody></table></div></section>
         </main>
     </div>
